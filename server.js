@@ -19,6 +19,7 @@ app.get('/about', function(req, res) {
     var bdate ='08/03/1997'
     res.render('pages/about',{Fullname :name,hobbies :hobbies,bdate :bdate});
 });
+//แก้ไขproduct
 app.get('/products/:pid', function(req, res) {
     var pid =req.params.pid;
     var sql ="select * from products where id=" + pid;
@@ -47,6 +48,18 @@ app.get('/products/:pprice', function(req, res) {
     db.any(sql)
     .then(function(data){
         res.render('pages/product_edit',{products : data[0]})
+    })
+    .catch(function(error){
+        console.log('ERROR:'+error);
+    })
+});
+//แก้ไขuser
+app.get('/users/:uid', function(req, res) {
+    var uid =req.params.uid;
+    var sql ="select * from users where id=" + uid;
+    db.any(sql)
+    .then(function(data){
+        res.render('pages/user_edit',{users : data[0]})
     })
     .catch(function(error){
         console.log('ERROR:'+error);
@@ -117,7 +130,7 @@ app.post('/products/update',function(req, res){
 var id = req.body.id;
 var title = req.body.title;
 var price = req.body.price;
-var sql = `update product set title = ${title},price = ${price} where id = ${id}`;
+var sql = `update products set title = '${title}',price = '${price}' where id = '${id}'`;
 //db.none
 db.any(sql)
         .then(function (data) {
@@ -186,7 +199,29 @@ app.post('/addnewproduct', function (req, res) {
         })
 
 })
+//add new user
+app.get('/newuser', function (req, res) {
+    res.render('pages/addnewuser');
+})
 
+app.post('/addnewuser', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+    var sql = `INSERT INTO users (id, email, password)
+    VALUES ('${id}', '${email}', '${password}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
 
 
 var port = process.env.PORT || 8080;

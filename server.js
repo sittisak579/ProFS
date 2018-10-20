@@ -176,6 +176,24 @@ app.get('/product_delete/:id', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
+//delete user in edit
+app.get('/user_delete/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'DELETE FROM users';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users');
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
 //add new product
 app.get('/newproduct', function (req, res) {
     res.render('pages/addnewproduct');

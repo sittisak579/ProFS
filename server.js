@@ -129,6 +129,23 @@ db.any(sql)
             console.log('ERROR:' + error);
         })
 });
+app.post('/user/update', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+
+    var sql = `update users set email = '${email}', password = '${password}' where id = '${id}' `;
+    db.none(sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users');
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
 //delete product in edit
 app.get('/product_delete/:id', function (req, res) {
     var id = req.params.id;
@@ -169,6 +186,7 @@ app.post('/addnewproduct', function (req, res) {
         })
 
 })
+
 
 
 var port = process.env.PORT || 8080;

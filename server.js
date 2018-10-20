@@ -4,6 +4,7 @@ var pgp = require('pg-promise')();
 var db = pgp('postgres://vxjopouelszoqp:b38107853d55cfcfb5ec84d98b68feb33b5b5dad7fae2fa12a9484f47bad97d1@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d28vk975k8u2um?ssl=true');
 var app =express();
 var bodyParser = require('body-parser');
+var moment = require('moment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
@@ -22,44 +23,25 @@ app.get('/about', function(req, res) {
 //แก้ไขproduct
 app.get('/products/:pid', function(req, res) {
     var pid =req.params.pid;
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql ="select * from products where id=" + pid;
     db.any(sql)
     .then(function(data){
-        res.render('pages/product_edit',{products : data[0]})
+        res.render('pages/product_edit',{products : data[0],time : time})
     })
     .catch(function(error){
         console.log('ERROR:'+error);
     })
 });
-app.get('/products/:ptitle', function(req, res) {
-    var ptitle =req.params.ptitle;
-    var sql ="select * from products where title=" + ptitle;
-    db.any(sql)
-    .then(function(data){
-        res.render('pages/product_edit',{products : data[0]})
-    })
-    .catch(function(error){
-        console.log('ERROR:'+error);
-    })
-});
-app.get('/products/:pprice', function(req, res) {
-    var pprice =req.params.pprice;
-    var sql ="select * from products where pprice=" + pprice;
-    db.any(sql)
-    .then(function(data){
-        res.render('pages/product_edit',{products : data[0]})
-    })
-    .catch(function(error){
-        console.log('ERROR:'+error);
-    })
-});
+
 //แก้ไขuser
 app.get('/users/:uid', function(req, res) {
     var uid =req.params.uid;
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql ="select * from users where id=" + uid;
     db.any(sql)
     .then(function(data){
-        res.render('pages/user_edit',{users : data[0]})
+        res.render('pages/user_edit',{users : data[0],time : time})
     })
     .catch(function(error){
         console.log('ERROR:'+error);

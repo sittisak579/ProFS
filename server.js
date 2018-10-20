@@ -119,10 +119,56 @@ var title = req.body.title;
 var price = req.body.price;
 var sql = `update product set title = ${title},price = ${price} where id = ${id}`;
 //db.none
-console.log('UPDATE:'+ sql);
-res.redirect('/products');
-});
+db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
 
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+//delete product in edit
+app.get('/product_delete/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'DELETE FROM products';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products');
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+//add new product
+app.get('/newproduct', function (req, res) {
+    res.render('pages/addnewproduct');
+})
+app.post('/addnewproduct', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `INSERT INTO products (id, title, price)
+    VALUES ('${id}', '${title}', '${price}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+})
 
 
 var port = process.env.PORT || 8080;

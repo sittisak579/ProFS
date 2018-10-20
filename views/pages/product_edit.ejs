@@ -1,5 +1,14 @@
 <% include ../partials/header%>
+<script language="javascript">
+//เรียกฟังชั่นเมื่อต้องการลบ
+function fncAlert(){
+alert('Do you want to delete product');
+}
+</script>
+
 <form action="/products/update" method="post">
+<div class="jumbotron">
+<h1 class="display-4">PRODUCT</h1>
 <div class="form-group">
   <label for="">ID</label>
   <input type="text"
@@ -10,15 +19,21 @@
 <label for="">Title</label>
   <input type="text"
     class="form-control" value="<%= products.title %>"name="title" id="" aria-describedby="helpId" placeholder="">
-  <small id="helpId" class="form-text text-muted">Product ID</small>
+  <small id="helpId" class="form-text text-muted">Product Title</small>
 </div>
+
 <div class="form-group">
 <label for="">Price</label>
   <input type="text"
     class="form-control"value="<%= products.price %>" name="price" id="" aria-describedby="helpId" placeholder="">
-  <small id="helpId" class="form-text text-muted">Product ID</small>
+  <small id="helpId" class="form-text text-muted">Product Price</small>
 </div>
-<button type="submit" class="btn btn-primary|secondary">save</button>
+
+<a name="" id="" class="btn btn-secondary" href="/products" role="button">CANCLE</a>
+<button type="submit" class="btn btn-success">SAVE</button>
+<a name="" id="" OnClick="JavaScript:fncAlert();" class="btn btn-danger" href="/product_delete/<%= product.id %>" role="button">DELETE</a>
+
+</div>
 </form>
 
 

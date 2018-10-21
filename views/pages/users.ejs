@@ -12,10 +12,10 @@
     <tbody id="myTable">
     <% users.forEach(function(users){ %>
         <tr>
-            <td scope="row"><%= users.id %></td>
+            <td scope="row"><%= users.user_id %></td>
             <td><%= users.email %></td>
             <td><%= users.password %></td>
-            <td><a  class="btn btn-primary" href="/users/<%= users.id %>" role="button">EDIT</a></td>
+            <td><a  class="btn btn-primary" href="/users/<%= users.user_id %>" role="button">EDIT</a></td>
         </tr>
     <%}); %>
     </tbody>

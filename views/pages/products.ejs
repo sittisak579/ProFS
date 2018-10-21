@@ -12,10 +12,10 @@
     <tbody id="myTable">
     <% products.forEach(function(products){ %>
         <tr>
-            <td scope="row"><%= products.id %></td>
+            <td scope="row"><%= products.product_id %></td>
             <td><%= products.title %></td>
             <td><%= products.price %></td>
-            <td><a class="btn btn-primary" href="/products/<%= products.id %>" role="button">Edit</a></td>
+            <td><a class="btn btn-primary" href="/products/<%= products.product_id %>" role="button">Edit</a></td>
         </tr>
     <%}); %>
     </tbody>

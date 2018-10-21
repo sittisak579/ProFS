@@ -3,16 +3,19 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Price</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>title</th>
+            <th>Quantity</th>
         </tr>
     </thead>
     <tbody id="myTable">
     
-    <% products.forEach(function(products){ %>
+    <% users.forEach(function(users){ %>
         <tr>
-            <td><%= products.title %></td>
-            <td><%= products.price %></td>
+            
+            <td><%= users.email %></td>
+            
             
         </tr>
     <%}); %>

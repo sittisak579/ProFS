@@ -235,6 +235,18 @@ app.get('/report_products', function (req, res) {
         })
 });
 
+app.get('/report_users', function (req, res) {
+    var sql = 'select * from users order by email DESC limit 10';
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/report_users',{users : data})
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function() {

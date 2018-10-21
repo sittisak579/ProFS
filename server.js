@@ -128,7 +128,6 @@ app.post('/user/update', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
-
     var sql = `update users set email = '${email}', password = '${password}' where id = '${id}' `;
     db.none(sql);
     db.any(sql)
@@ -216,6 +215,19 @@ app.post('/addnewuser', function (req, res) {
         .then(function (data) {
             console.log('DATA:' + data);
             res.redirect('/users')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
+app.get('/report_products', function (req, res) {
+    var sql = 'select * from products order by price DESC limit 10';
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/report_products',{products : data})
         })
 
         .catch(function (error) {

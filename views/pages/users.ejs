@@ -1,18 +1,20 @@
 <% include ../partials/header%>
 <input class="form-control" id="myInput" type="text" placeholder="Search..">
-<table class="table">
+<h1 class="text-center">Users</h1>
+<div class="jumbotron p-3 mb-2 bg-danger text-white ">
+<table class="table p-3 mb-2 bg-warning text-dark">
     <thead>
-        <tr>
-            <th>ID</th>
+        <tr class="text-success text-white bg-dark">
+            <th >ID</th>
             <th>Email</th>
             <th>Password</th>
-            <th><a  class="btn btn-danger" href="/newuser" role="button">ADD NEW</a></th>
+            <th><a  class="btn btn-success" href="/newuser" role="button">ADD NEW</a></th>
         </tr>
     </thead>
     <tbody id="myTable">
     <% users.forEach(function(users){ %>
         <tr>
-            <td scope="row"><%= users.user_id %></td>
+            <td scope="row" class="text-primary"><%= users.user_id %></td>
             <td><%= users.email %></td>
             <td><%= users.password %></td>
             <td><a  class="btn btn-primary" href="/users/<%= users.user_id %>" role="button">EDIT</a></td>
@@ -20,6 +22,7 @@
     <%}); %>
     </tbody>
 </table>
+</div>
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {

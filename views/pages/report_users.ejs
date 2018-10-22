@@ -1,9 +1,10 @@
 <% include ../partials/header%>
 <h1 class="text-center">Report:Top 20 Customers by Sales</h1>
-<table class="table">
+<div class="jumbotron p-3 mb-2 bg-danger text-white ">
+<table class="table p-3 mb-2 bg-warning text-dark"  >
     <thead>
-        <tr>
-            <th>Name</th>
+        <tr class="text-success text-white bg-dark">
+            <th >Name</th>
             <th>Email</th>
             <th>title</th>
             <th>Quantity</th>
@@ -22,4 +23,5 @@
         <% }); %>
     </tbody>
 </table>
+</div>
 <% include ../partials/footer%>

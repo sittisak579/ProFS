@@ -1,21 +1,30 @@
-<% include ../partials/header%>
-<h1 class="display-3">Top10 Expensive Products </h1>
-<table class="table">
+<% include ../partials/header %>
+<h1 class="text-center">Report:Purchase by item</h1>
+<div class="jumbotron p-3 mb-2 bg-danger text-white ">
+<table class="table p-3 mb-2 bg-warning text-dark">
     <thead>
-        <tr>
-            <th>Title</th>
-            <th>Price</th>
+        <tr class="text-success text-white bg-dark">
+        <th>ITEM NAME</th>
+        <th>QUANTITY PURCHASED</th>
+        <th>AMOUNT</th>
         </tr>
     </thead>
     <tbody id="myTable">
-    
-    <% products.forEach(function(products){ %>
+    <% products.forEach(function(product) { %>
         <tr>
-            <td><%= products.title %></td>
-            <td><%= products.price %></td>
-            
+            <td scope="row"><%= product.title %></font></td>
+            <td><%= product.quantity %></font></td>
+            <td>$<%= product.price %></font></td>
         </tr>
-    <%}); %>
+        <% }); %>
+        <% sum.forEach(function(sum) { %>
+        <tr class="text-white bg-dark">
+            <td scope="row"><h5>Total</h5></td>
+            <td id="quantity"><h5><%= sum.squantity %></h5></td>
+            <td id="price"><h5>$<%= sum.sprice %></h5></td>
+        </tr>
+        <% }); %>
     </tbody>
 </table>
-<% include ../partials/footer%>
+</div>
+  <% include ../partials/footer %>
